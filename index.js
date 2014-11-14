@@ -5,6 +5,7 @@ var mucss = require('mucss');
  * @module
  */
 module.exports = align;
+module.exports.numerify = numerify;
 
 
 var doc = document, win = window;
