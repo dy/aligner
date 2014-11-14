@@ -1,0 +1,23 @@
+{
+  "name": "aligner",
+  "version": "0.0.0",
+  "description": "Align DOM elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dfcreative/aligner.git"
+  },
+  "keywords": [
+    "align",
+    "place"
+  ],
+  "author": "dm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfcreative/aligner/issues"
+  },
+  "homepage": "https://github.com/dfcreative/aligner"
+}

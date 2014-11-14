@@ -1,0 +1,94 @@
+﻿<!doctype html>
+
+<style>
+	* {
+		box-sizing: border-box;
+	}
+	.container{
+		position: relative;
+		margin: 40px auto;
+		max-width: 800px;
+		width: 80%;
+		min-height: 240px;
+	}
+	.target{
+		position: absolute;
+		min-width: 30px;
+		min-height: 30px;
+		background: rgba(62, 215, 162, 0.55);
+		border: 2px solid rgba(62, 215, 162, 1);
+	}
+	#target-1{
+		top: 2em;
+		left: 3em;
+		width: 3em;
+		height: 2em;
+		margin: 5px;
+	}
+	#target-2{
+		position: relative;
+		top: 5em;
+		left: 7em;
+		width: 5em;
+		height: 4em;
+		margin: 7px;
+	}
+	#target-3{
+		bottom: 0em;
+		right: 16em;
+		width: 4em;
+		height: 6em;
+		margin: 10px;
+	}
+
+	.displacer {
+		position: relative;
+		top: 30px;
+		left: 40px;
+		margin: 10px;
+		padding: 10px;
+	}
+
+	nav{
+		text-align: center;
+	}
+</style>
+
+
+<div class="container">
+	<div id="target-1" class="target"></div>
+	<div class="displacer">
+		<div id="target-2" class="target"></div>
+	</div>
+	<div id="target-3" class="target"></div>
+</div>
+
+
+<nav>
+	<button id="left">←</button>
+	<button id="center">|</button>
+	<button id="right">→</button>&nbsp;&nbsp;
+	<button id="top">↑</button>
+	<button id="middle">—</button>
+	<button id="bottom">↓</button>
+</nav>
+
+
+<script src="node_modules/require-stub/index.js"></script>
+<script src="node_modules/mucss/index.js" data-module-name="mucss"></script>
+<script src="index.js" data-module-name="aligner"></script>
+<script>
+	var align = require('aligner');
+
+	var targets = document.querySelectorAll('.target');
+
+	var btns = document.querySelectorAll('button');
+
+	for (var i = btns.length, btn; i--;) {
+		btn = btns[i];
+
+		btn.onclick = function(){
+			align(targets, this.id);
+		};
+	}
+</script>
