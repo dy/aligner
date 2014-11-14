@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/dfcreative/aligner/issues"
   },
-  "homepage": "https://github.com/dfcreative/aligner"
+  "homepage": "https://github.com/dfcreative/aligner",
+  "dependencies": {
+    "mumath": "~0.2.0"
+  }
 }

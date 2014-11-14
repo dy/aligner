@@ -1,5 +1,5 @@
 var mucss = require('mucss');
-
+var m = require('mumath');
 
 /**
  * @module
@@ -77,13 +77,18 @@ function alignX ( placee, placerRect, align ){
 	var placeeMargins = css.margins(placee);
 
 	//get relativeTo & parent rectangles
-	var parent = placee.offsetParent || win;
+	var parent = placee.offsetParent;
 	var parentRect = css.offsets(parent);
 	var parentPaddings = css.paddings(parent);
+	var parentBorders = css.borders(parent);
+
+	//correct parentRect
+	if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
+		parentRect.left = 0;
+	}
 
 	//desirable absolute left
-	var desirableAbsLeft = placerRect.left + placerRect.width*align - placeeWidth*align;
-	var desirableLeft = desirableAbsLeft - parentRect.left - placeeMargins.left - parentPaddings.left;
+	var desirableLeft = placerRect.left + placerRect.width*align - placeeWidth*align + parentBorders.left - parentRect.left - placeeMargins.left - parentPaddings.left;
 
 	css(placee, {
 		left: desirableLeft,
@@ -104,13 +109,18 @@ function alignY ( placee, placerRect, align ){
 	var placeeMargins = css.margins(placee);
 
 	//get relativeTo & parent rectangles
-	var parent = placee.offsetParent || win;
+	var parent = placee.offsetParent ;
 	var parentRect = css.offsets(parent);
 	var parentPaddings = css.paddings(parent);
+	var parentBorders = css.borders(parent);
+
+	//correct parentRect
+	if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
+		parentRect.top = 0;
+	}
 
 	//desirable absolute top
-	var desirableAbsTop = placerRect.top + placerRect.height*align - placeeHeight*align;
-	var desirableTop = desirableAbsTop - parentRect.top - placeeMargins.top - parentPaddings.top;
+	var desirableTop = placerRect.top + placerRect.height*align - placeeHeight*align + parentBorders.top - parentRect.top - placeeMargins.top - parentPaddings.top;
 
 	css(placee, {
 		top: desirableTop,
@@ -124,8 +134,6 @@ function alignY ( placee, placerRect, align ){
  * @param {string|number} value Convert any value passed to float 0..1
  */
 function numerify(value){
-	if (!value) return 0;
-
 	if (typeof value === 'string') {
 		//else parse single-value
 		switch (value) {
@@ -139,8 +147,8 @@ function numerify(value){
 			case 'middle':
 				return 0.5;
 		}
+		return parseFloat(value);
 	}
-	var num = parseFloat(value);
 
-	return num !== undefined ? num : 0.5;
+	return value;
 }
