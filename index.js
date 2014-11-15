@@ -1,4 +1,4 @@
-var mucss = require('mucss');
+var css = require('mucss');
 var m = require('mumath');
 
 /**
