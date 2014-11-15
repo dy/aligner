@@ -45,7 +45,7 @@ function align(els, alignment, relativeTo){
 
 
 	//apply alignment
-	var toRect = css.offsets(relativeTo || win);
+	var toRect = css.offsets(relativeTo);
 	for (var i = els.length, el, s; i--;){
 		el = els[i];
 
@@ -57,8 +57,28 @@ function align(els, alignment, relativeTo){
 		//ensure element is at least relative, if it is static
 		if (s.position === 'static') css(el, 'position', 'relative');
 
-		alignX(els[i], toRect, xAlign);
-		alignY(els[i], toRect, yAlign);
+
+		//include margins
+		var placeeMargins = css.margins(el);
+
+		//get relativeTo & parent rectangles
+		var parent = el.offsetParent || win;
+		var parentRect = css.offsets(parent);
+		var parentPaddings = css.paddings(parent);
+		var parentBorders = css.borders(parent);
+
+		//correct parentRect
+		if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
+			parentRect.left = 0;
+			parentRect.top = 0;
+		}
+		parentRect = m.sub(parentRect, parentBorders);
+		parentRect = m.add(parentRect, placeeMargins);
+		parentRect = m.add(parentRect, parentPaddings);
+
+
+		alignX(els[i], toRect, parentRect, xAlign);
+		alignY(els[i], toRect, parentRect, yAlign);
 	}
 }
 
@@ -68,27 +88,11 @@ function align(els, alignment, relativeTo){
 /**
  * Place horizontally
  */
-function alignX ( placee, placerRect, align ){
+function alignX ( placee, placerRect, parentRect, align ){
 	if (typeof align !== 'number') return;
 
-	var placeeWidth = placee.offsetWidth;
-
-	//include margins
-	var placeeMargins = css.margins(placee);
-
-	//get relativeTo & parent rectangles
-	var parent = placee.offsetParent;
-	var parentRect = css.offsets(parent);
-	var parentPaddings = css.paddings(parent);
-	var parentBorders = css.borders(parent);
-
-	//correct parentRect
-	if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
-		parentRect.left = 0;
-	}
-
 	//desirable absolute left
-	var desirableLeft = placerRect.left + placerRect.width*align - placeeWidth*align + parentBorders.left - parentRect.left - placeeMargins.left - parentPaddings.left;
+	var desirableLeft = placerRect.left + placerRect.width*align - placee.offsetWidth*align - parentRect.left;
 
 	css(placee, {
 		left: desirableLeft,
@@ -100,27 +104,11 @@ function alignX ( placee, placerRect, align ){
 /**
  * Place vertically
  */
-function alignY ( placee, placerRect, align ){
+function alignY ( placee, placerRect, parentRect, align ){
 	if (typeof align !== 'number') return;
 
-	var placeeHeight = placee.offsetHeight;
-
-	//include margins
-	var placeeMargins = css.margins(placee);
-
-	//get relativeTo & parent rectangles
-	var parent = placee.offsetParent ;
-	var parentRect = css.offsets(parent);
-	var parentPaddings = css.paddings(parent);
-	var parentBorders = css.borders(parent);
-
-	//correct parentRect
-	if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
-		parentRect.top = 0;
-	}
-
 	//desirable absolute top
-	var desirableTop = placerRect.top + placerRect.height*align - placeeHeight*align + parentBorders.top - parentRect.top - placeeMargins.top - parentPaddings.top;
+	var desirableTop = placerRect.top + placerRect.height*align - placee.offsetHeight*align - parentRect.top;
 
 	css(placee, {
 		top: desirableTop,
