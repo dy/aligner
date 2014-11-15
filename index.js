@@ -8,7 +8,7 @@ module.exports = align;
 module.exports.numerify = numerify;
 
 
-var doc = document, win = window;
+var doc = document, win = window, root = doc.documentElement;
 
 
 
