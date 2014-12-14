@@ -1,7 +1,7 @@
 {
   "name": "aligner",
   "version": "0.0.6",
-  "description": "Align DOM elements",
+  "description": "Align DOM elements just like photoshop/illustrator alignment does",
   "main": "index.js",
   "scripts": {
     "test": "test.html"
@@ -14,13 +14,13 @@
     "align",
     "place"
   ],
-  "author": "dm",
-  "license": "MIT",
+  "author": "Deema Ywanov",
+  "license": "unlicense",
   "bugs": {
     "url": "https://github.com/dfcreative/aligner/issues"
   },
   "homepage": "https://github.com/dfcreative/aligner",
   "dependencies": {
-    "mumath": "~0.2.0"
+    "mumath": ">=0.2.0"
   }
 }

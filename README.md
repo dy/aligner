@@ -1,3 +1,5 @@
+# Aligner [![Code Climate](https://codeclimate.com/github/dfcreative/aligner/badges/gpa.svg)](https://codeclimate.com/github/dfcreative/aligner) <a href="UNLICENSE"><img src="http://upload.wikimedia.org/wikipedia/commons/6/62/PD-icon.svg" width="20"/></a>
+
 Align DOM elements just like photoshop/illustrator alignment does.
 
 ```js
@@ -13,6 +15,7 @@ var els = document.querySelectorAll('div');
 align(els, 'left');
 ```
 
+
 ## API
 
 `align(elements, alignment?, relativeTo?)` - align element according to the params passed.
@@ -23,6 +26,6 @@ align(els, 'left');
 
 
 
-## License
 
-MIT
+
+[![NPM](https://nodei.co/npm/aligner.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/aligner/)
