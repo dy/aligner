@@ -1,4 +1,4 @@
-# Aligner [![Code Climate](https://codeclimate.com/github/dfcreative/aligner/badges/gpa.svg)](https://codeclimate.com/github/dfcreative/aligner) <a href="UNLICENSE"><img src="http://upload.wikimedia.org/wikipedia/commons/6/62/PD-icon.svg" width="20"/></a>
+# Aligner <a href="UNLICENSE"><img src="http://upload.wikimedia.org/wikipedia/commons/6/62/PD-icon.svg" width="20"/></a>
 
 Align DOM elements just like photoshop/illustrator alignment does.
 
