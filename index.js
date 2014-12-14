@@ -1,5 +1,9 @@
-var css = require('mucss');
 var m = require('mumath');
+var margins = require('mucss/margins');
+var paddings = require('mucss/paddings');
+var offsets = require('mucss/offsets');
+var borders = require('mucss/borders');
+var css = require('mucss/css');
 
 /**
  * @module
@@ -45,7 +49,7 @@ function align(els, alignment, relativeTo){
 
 
 	//apply alignment
-	var toRect = css.offsets(relativeTo);
+	var toRect = offsets(relativeTo);
 	for (var i = els.length, el, s; i--;){
 		el = els[i];
 
@@ -59,13 +63,13 @@ function align(els, alignment, relativeTo){
 
 
 		//include margins
-		var placeeMargins = css.margins(el);
+		var placeeMargins = margins(el);
 
 		//get relativeTo & parent rectangles
 		var parent = el.offsetParent || win;
-		var parentRect = css.offsets(parent);
-		var parentPaddings = css.paddings(parent);
-		var parentBorders = css.borders(parent);
+		var parentRect = offsets(parent);
+		var parentPaddings = paddings(parent);
+		var parentBorders = borders(parent);
 
 		//correct parentRect
 		if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
