@@ -1,10 +1,10 @@
 {
   "name": "aligner",
   "version": "0.0.8",
-  "description": "Align DOM elements just like photoshop/illustrator alignment does",
+  "description": "Align elements just like photoshop/illustrator does",
   "main": "index.js",
   "scripts": {
-    "test": "test.html"
+    "watch": "watchify -r ./index.js:aligner -d -o ./bundle.js"
   },
   "repository": {
     "type": "git",
@@ -14,17 +14,17 @@
     "align",
     "place"
   ],
-  "author": "Deema Ywanov",
+  "author": "Deema Ywanov <dfcreative@gmail.com>",
   "license": "unlicense",
   "bugs": {
     "url": "https://github.com/dfcreative/aligner/issues"
   },
   "homepage": "https://github.com/dfcreative/aligner",
   "dependencies": {
-    "mumath": ">=0.2.0",
-    "mucss": ">=0.5.7"
+    "mucss": "^1.0.2",
+    "mumath": "^1.0.2"
   },
   "devDependencies": {
-    "require-stub": ">=1.5.12"
+    "watchify": "^3.3.0"
   }
 }

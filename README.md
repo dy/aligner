@@ -1,6 +1,6 @@
-# Aligner <a href="UNLICENSE"><img src="http://upload.wikimedia.org/wikipedia/commons/6/62/PD-icon.svg" width="20"/></a>
+# Aligner
 
-Align DOM elements just like photoshop/illustrator alignment does.
+Align DOM elements just like photoshop/illustrator aligner does.
 
 ```js
 npm install aligner
@@ -18,11 +18,11 @@ align(els, 'left');
 
 ## API
 
-`align(elements, alignment?, relativeTo?)` - align element according to the params passed.
+`align(elements, alignment?, alignTarget?)` - align element according to the params passed.
 
 * `elements` - a set of elements to align
 * `alignment` values: `'top'`, `'bottom'`, `'left'`, `'right'`, `'center'` (centered align by x), `'middle'` (centered align by y), a number [0..1] to align by x, or array [xAlign?, yAlign?], where alignment is a number [0..1]. Default is 0 (align left).
-* `relativeTo` is an element to perform alignment relative to, by default it’s the first element in elements.
+* `alignTarget` is an element to perform alignment relative to, by default it’s the first element in elements.
 
 
 

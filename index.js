@@ -1,8 +1,8 @@
 var m = require('mumath');
-var margins = require('mucss/margins');
-var paddings = require('mucss/paddings');
-var offsets = require('mucss/offsets');
-var borders = require('mucss/borders');
+var margins = require('mucss/margin');
+var paddings = require('mucss/padding');
+var offsets = require('mucss/offset');
+var borders = require('mucss/border');
 var css = require('mucss/css');
 
 /**
