@@ -1,6 +1,6 @@
 # Aligner
 
-Align DOM elements just like photoshop/illustrator aligner does.
+Align DOM elements just like photoshop/illustrator aligner does. [Demo](http://dfcreative.github.io/aligner).
 
 ```js
 npm install aligner
