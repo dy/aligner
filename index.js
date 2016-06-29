@@ -1,5 +1,4 @@
-var sub = require('mumath/sub');
-var add = require('mumath/add');
+var m = require('mumath');
 var margins = require('mucss/margin');
 var paddings = require('mucss/padding');
 var offsets = require('mucss/offset');
@@ -10,7 +9,7 @@ var css = require('mucss/css');
  * @module
  */
 module.exports = align;
-module.exports.numerify = numerify;
+module.exports.toFloat = toFloat;
 
 
 var doc = document, win = window, root = doc.documentElement;
@@ -37,15 +36,15 @@ function align(els, alignment, relativeTo){
 	//figure out x/y
 	var xAlign, yAlign;
 	if (alignment instanceof Array) {
-		xAlign = numerify(alignment[0]);
-		yAlign = numerify(alignment[1]);
+		xAlign = toFloat(alignment[0]);
+		yAlign = toFloat(alignment[1]);
 	}
 	//catch y values
 	else if (/top|middle|bottom/.test(alignment)) {
-		yAlign = numerify(alignment);
+		yAlign = toFloat(alignment);
 	}
 	else {
-		xAlign = numerify(alignment);
+		xAlign = toFloat(alignment);
 	}
 
 
@@ -53,6 +52,8 @@ function align(els, alignment, relativeTo){
 	var toRect = offsets(relativeTo);
 	for (var i = els.length, el, s; i--;){
 		el = els[i];
+
+		if (el === window) continue;
 
 		//ignore self
 		if (el === relativeTo) continue;
@@ -77,10 +78,9 @@ function align(els, alignment, relativeTo){
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
-		parentRect = sub(parentRect, parentBorders);
-		parentRect = add(parentRect, placeeMargins);
-		parentRect = add(parentRect, parentPaddings);
-
+		parentRect = m.sub(parentRect, parentBorders);
+		parentRect = m.add(parentRect, placeeMargins);
+		parentRect = m.add(parentRect, parentPaddings);
 
 		alignX(els[i], toRect, parentRect, xAlign);
 		alignY(els[i], toRect, parentRect, yAlign);
@@ -126,7 +126,7 @@ function alignY ( placee, placerRect, parentRect, align ){
 /**
  * @param {string|number} value Convert any value passed to float 0..1
  */
-function numerify(value){
+function toFloat(value){
 	if (typeof value === 'string') {
 		//else parse single-value
 		switch (value) {
@@ -140,6 +140,7 @@ function numerify(value){
 			case 'middle':
 				return 0.5;
 		}
+		// throw Error('Alignment ' + value + 'is weird');
 		return parseFloat(value);
 	}
 
