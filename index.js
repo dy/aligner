@@ -73,7 +73,7 @@ function align(els, alignment, relativeTo){
 		var parentBorders = borders(parent);
 
 		//correct parentRect
-		if ((parent === doc.body && getComputedStyle(parent).position === 'static') && parent === root ) {
+		if ((parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root ) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
