@@ -32,7 +32,6 @@ function align(els, alignment, relativeTo){
 	//default key element is the first one
 	if (!relativeTo) relativeTo = els[0];
 
-
 	//figure out x/y
 	var xAlign, yAlign;
 	if (alignment instanceof Array) {
@@ -74,7 +73,7 @@ function align(els, alignment, relativeTo){
 		var parentBorders = borders(parent);
 
 		//correct parentRect
-		if (parent === doc.body || parent === root && getComputedStyle(parent).position === 'static') {
+		if ((parent === doc.body && getComputedStyle(parent).position === 'static') && parent === root ) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
