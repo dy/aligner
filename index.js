@@ -4,6 +4,7 @@ var paddings = require('mucss/padding');
 var offsets = require('mucss/offset');
 var borders = require('mucss/border');
 var css = require('mucss/css');
+var isFixed = require('mucss/is-fixed');
 
 /**
  * @module
@@ -48,7 +49,7 @@ function align(els, alignment, relativeTo){
 
 
 	//apply alignment
-	var toRect = offsets(relativeTo);
+	var targetRect = offsets(relativeTo);
 	for (var i = els.length, el, s; i--;){
 		el = els[i];
 
@@ -73,16 +74,22 @@ function align(els, alignment, relativeTo){
 		var parentBorders = borders(parent);
 
 		//correct parentRect
-		if ((parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root ) {
+		if (parent === window || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root ) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
+
 		parentRect = m.sub(parentRect, parentBorders);
 		parentRect = m.add(parentRect, placeeMargins);
+
+		if (isFixed(el)) {
+			targetRect.top = 0;
+			targetRect.left = 0;
+		}
 		// parentRect = m.add(parentRect, parentPaddings);
 
-		alignX(els[i], toRect, parentRect, xAlign);
-		alignY(els[i], toRect, parentRect, yAlign);
+		alignX(els[i], targetRect, parentRect, xAlign);
+		alignY(els[i], targetRect, parentRect, yAlign);
 	}
 }
 
