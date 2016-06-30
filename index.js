@@ -79,7 +79,7 @@ function align(els, alignment, relativeTo){
 		}
 		parentRect = m.sub(parentRect, parentBorders);
 		parentRect = m.add(parentRect, placeeMargins);
-		parentRect = m.add(parentRect, parentPaddings);
+		// parentRect = m.add(parentRect, parentPaddings);
 
 		alignX(els[i], toRect, parentRect, xAlign);
 		alignY(els[i], toRect, parentRect, yAlign);
