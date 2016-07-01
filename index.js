@@ -81,10 +81,18 @@ function align(els, alignment, relativeTo){
 		var parentPaddings = paddings(parent);
 		var parentBorders = borders(parent);
 
-		parentRect.top += -parentBorders.top + placeeMargins.top + parentPaddings.top;
-		parentRect.left += -parentBorders.left + placeeMargins.left + parentPaddings.left;
-		parentRect.bottom += -parentBorders.bottom + placeeMargins.bottom + parentPaddings.bottom;
-		parentRect.right += -parentBorders.right + placeeMargins.right + parentPaddings.right;
+		parentRect.top += -parentBorders.top + placeeMargins.top;
+		parentRect.left += -parentBorders.left + placeeMargins.left;
+		parentRect.bottom += -parentBorders.bottom + placeeMargins.bottom;
+		parentRect.right += -parentBorders.right + placeeMargins.right;
+
+		//FIXME: I don’t understand why, but for popoff and placer it is required like that
+		if (parent !== doc.body) {
+			parentRect.top += parentPaddings.top
+			parentRect.left += parentPaddings.left;
+			parentRect.bottom += parentPaddings.bottom;
+			parentRect.right += parentPaddings.right;
+		}
 
 		//correct parentRect
 		if (parent === window || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root) {
