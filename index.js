@@ -50,6 +50,11 @@ function align(els, alignment, relativeTo){
 
 	//apply alignment
 	var targetRect = offsets(relativeTo);
+	if (relativeTo === window) {
+		targetRect.top = 0;
+		targetRect.left = 0;
+	}
+
 	for (var i = els.length, el, s; i--;){
 		el = els[i];
 
@@ -79,11 +84,10 @@ function align(els, alignment, relativeTo){
 		var parentBorders = borders(parent);
 
 		//correct parentRect
-		if (parent === window || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root ) {
+		if (parent === window || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
-
 		parentRect = m.sub(parentRect, parentBorders);
 		parentRect = m.add(parentRect, placeeMargins);
 
