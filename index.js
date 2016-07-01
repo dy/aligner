@@ -1,4 +1,5 @@
-var m = require('mumath');
+var add = require('mumath/add');
+var sub = require('mumath/sub');
 var margins = require('mucss/margin');
 var paddings = require('mucss/padding');
 var offsets = require('mucss/offset');
@@ -88,8 +89,8 @@ function align(els, alignment, relativeTo){
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
-		parentRect = m.sub(parentRect, parentBorders);
-		parentRect = m.add(parentRect, placeeMargins);
+		parentRect = sub(parentRect, parentBorders);
+		parentRect = add(parentRect, placeeMargins);
 
 		// parentRect = m.add(parentRect, parentPaddings);
 
