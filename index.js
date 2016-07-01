@@ -68,7 +68,12 @@ function align(els, alignment, relativeTo){
 		var placeeMargins = margins(el);
 
 		//get relativeTo & parent rectangles
-		var parent = el.offsetParent || win;
+		if (isFixed(el)) {
+			var parent = win;
+		}
+		else {
+			var parent = el.offsetParent || win;
+		}
 		var parentRect = offsets(parent);
 		var parentPaddings = paddings(parent);
 		var parentBorders = borders(parent);
@@ -82,10 +87,6 @@ function align(els, alignment, relativeTo){
 		parentRect = m.sub(parentRect, parentBorders);
 		parentRect = m.add(parentRect, placeeMargins);
 
-		if (isFixed(el)) {
-			targetRect.top = 0;
-			targetRect.left = 0;
-		}
 		// parentRect = m.add(parentRect, parentPaddings);
 
 		alignX(els[i], targetRect, parentRect, xAlign);
