@@ -4,7 +4,8 @@
   "description": "Align elements just like photoshop/illustrator does",
   "main": "index.js",
   "scripts": {
-    "watch": "watchify -r ./index.js:aligner -d -o ./bundle.js"
+    "watch": "watchify -r ./index.js:aligner -d -o ./bundle.js",
+    "build": "browserify -r ./index.js:aligner -d -o ./bundle.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,7 @@
   },
   "homepage": "https://github.com/dfcreative/aligner",
   "dependencies": {
-    "mucss": "^1.0.2",
-    "mumath": "^1.0.2"
+    "mucss": "^1.0.2"
   },
   "devDependencies": {
     "watchify": "^3.3.0"

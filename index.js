@@ -1,10 +1,7 @@
-var add = require('mumath/add');
-var sub = require('mumath/sub');
 var margins = require('mucss/margin');
 var paddings = require('mucss/padding');
 var offsets = require('mucss/offset');
 var borders = require('mucss/border');
-var css = require('mucss/css');
 var isFixed = require('mucss/is-fixed');
 
 /**
@@ -67,11 +64,8 @@ function align(els, alignment, relativeTo){
 		s = getComputedStyle(el);
 
 		//ensure element is at least relative, if it is static
-		if (s.position === 'static') css(el, 'position', 'relative');
+		if (s.position === 'static') el.style.position = 'relative';
 
-
-		//include margins
-		var placeeMargins = margins(el);
 
 		//get relativeTo & parent rectangles
 		if (isFixed(el)) {
@@ -80,19 +74,23 @@ function align(els, alignment, relativeTo){
 		else {
 			var parent = el.offsetParent || win;
 		}
+
+		//include margins
+		var placeeMargins = margins(el);
 		var parentRect = offsets(parent);
 		var parentPaddings = paddings(parent);
 		var parentBorders = borders(parent);
+
+		parentRect.top += -parentBorders.top + placeeMargins.top + parentPaddings.top;
+		parentRect.left += -parentBorders.left + placeeMargins.left + parentPaddings.left;
+		parentRect.bottom += -parentBorders.bottom + placeeMargins.bottom + parentPaddings.bottom;
+		parentRect.right += -parentBorders.right + placeeMargins.right + parentPaddings.right;
 
 		//correct parentRect
 		if (parent === window || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
-		parentRect = sub(parentRect, parentBorders);
-		parentRect = add(parentRect, placeeMargins);
-
-		// parentRect = m.add(parentRect, parentPaddings);
 
 		alignX(els[i], targetRect, parentRect, xAlign);
 		alignY(els[i], targetRect, parentRect, yAlign);
@@ -111,10 +109,8 @@ function alignX ( placee, placerRect, parentRect, align ){
 	//desirable absolute left
 	var desirableLeft = placerRect.left + placerRect.width*align - placee.offsetWidth*align - parentRect.left;
 
-	css(placee, {
-		left: desirableLeft,
-		right: 'auto'
-	});
+	placee.style.left = desirableLeft + 'px';
+	placee.style.right = 'auto';
 }
 
 
@@ -127,10 +123,8 @@ function alignY ( placee, placerRect, parentRect, align ){
 	//desirable absolute top
 	var desirableTop = placerRect.top + placerRect.height*align - placee.offsetHeight*align - parentRect.top;
 
-	css(placee, {
-		top: desirableTop,
-		bottom: 'auto'
-	});
+	placee.style.top = desirableTop + 'px';
+	placee.style.bottom = 'auto';
 }
 
 
