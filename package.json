@@ -1,6 +1,6 @@
 {
   "name": "aligner",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Align elements just like photoshop/illustrator does",
   "main": "index.js",
   "scripts": {
