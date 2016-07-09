@@ -95,7 +95,7 @@ function align(els, alignment, relativeTo){
 		}
 
 		//correct parentRect
-		if ((parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root) {
+		if ((parent === window && isFixed(relativeTo)) || (parent === doc.body && getComputedStyle(parent).position === 'static') || parent === root) {
 			parentRect.left = 0;
 			parentRect.top = 0;
 		}
