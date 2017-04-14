@@ -1,5 +1,7 @@
 # Aligner
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dfcreative/aligner.svg)](https://greenkeeper.io/)
+
 Align DOM elements just like photoshop/illustrator aligner does. [Demo](http://dfcreative.github.io/aligner).
 
 ```js
